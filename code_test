@@ -1,0 +1,23 @@
+import numpy as np
+import pandas as pd
+from statsmodels.tsa.stattools import adfuller
+import scipy
+
+# Exemple de série temporelle
+data = pd.Series([100, 102, 104, 106, 108, 110, 115, 120, 125, 130])
+
+# Appliquer le test ADF
+result = adfuller(data)
+
+# Affichage des résultats
+print("ADF Statistic:", result[0])
+print("p-value:", result[1])
+print("Critical Values:")
+for key, value in result[4].items():
+    print(f"   {key}: {value}")
+
+# Décision sur la stationnarité
+if result[1] <= 0.05:
+    print("La série est stationnaire (rejette H0).")
+else:
+    print("La série n'est pas stationnaire (ne rejette pas H0).")
